@@ -71,7 +71,6 @@ export default class CheckBox extends Component {
     }
 
     _renderImage() {
-     _renderImage() {
         if (this.props.isIndeterminate){
             return this.props.indeterminateImage ? this.props.indeterminateImage : this.genCheckedImage();
         }
