@@ -41,6 +41,7 @@ export default class CheckBox extends Component {
         isIndeterminate: PropTypes.bool.isRequired,
         checkBoxColor: PropTypes.string,
         disabled: PropTypes.bool,
+        uncheckBoxColor: PropTypes.string,
     }
     static defaultProps = {
         isChecked: false,
@@ -70,17 +71,18 @@ export default class CheckBox extends Component {
     }
 
     _renderImage() {
+     _renderImage() {
         if (this.props.isIndeterminate){
             return this.props.indeterminateImage ? this.props.indeterminateImage : this.genCheckedImage();
         }
         if (this.state.isChecked) {
-            return this.props.checkedImage ? this.props.checkedImage : this.genCheckedImage();
+            return this.props.checkedImage ? this.props.checkedImage : this.genCheckedImage({tintColor: this.props.checkBoxColor});
         } else {
-            return this.props.unCheckedImage ? this.props.unCheckedImage : this.genCheckedImage();
+            return this.props.unCheckedImage ? this.props.unCheckedImage : this.genCheckedImage({tintColor: this.props.uncheckBoxColor});
         }
     }
 
-    genCheckedImage() {
+    genCheckedImage(style) {
         var source;
         if (this.props.isIndeterminate) {
             source = require('./img/ic_indeterminate_check_box.png');
@@ -90,7 +92,7 @@ export default class CheckBox extends Component {
         }
 
         return (
-            <Image source={source} style={{tintColor: this.props.checkBoxColor}} />
+            <Image source={source} style={style} />
         );
     }
 
